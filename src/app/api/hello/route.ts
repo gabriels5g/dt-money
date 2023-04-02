@@ -1,3 +1,12 @@
+import { NextResponse } from "next/server";
+
 export async function GET(request: Request) {
-  return new Response('Hello, Next.js!')
+  return NextResponse.json({
+    id: 1,
+    title: "Transaction 1",
+    amount: 400,
+    type: "deposit",
+    category: "Food",
+    createdAt: new Date(),
+  });
 }
