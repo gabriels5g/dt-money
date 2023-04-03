@@ -27,12 +27,7 @@ export default createGlobalStyle`
 
   html {
     font-family: var(--roboto-font);
-    @media (min-width: 1080px) {
-      font-size: 93.75%
-    }
-    @media (min-width: 720px) {
-      font-size: 87.5%
-    }
+
   }
   :root {
     --background: #202024;
@@ -73,9 +68,9 @@ export default createGlobalStyle`
 		width: 100%;
 		max-width: 535px;
 		background: var(--background);
-		padding: 3rem;
+		padding: 2.5rem 3rem;
 		position: relative;
-		border-radius: 0.25rem;
+		border-radius: 0.375rem;
 
   }
 

@@ -1,9 +1,18 @@
 import Image from "next/image";
+import { useState } from "react";
 import Modal from "react-modal";
 import Close from "../../assets/close.svg";
 import incomeImg from "../../assets/entrada.svg";
 import outcomeImg from "../../assets/saida.svg";
-import { Container, TransactionTypeContainer } from "./styles";
+
+import incomeImgActive from "../../assets/entradaAtiva.svg";
+import outcomeImgActive from "../../assets/saidaAtiva.svg";
+import {
+  Container,
+  RadioBoxDeposit,
+  RadioBoxWithdraw,
+  TransactionTypeContainer,
+} from "./styles";
 
 interface NewTransactionModalProps {
   isOpen: boolean;
@@ -15,6 +24,8 @@ export function NewTransactionModal({
   isOpen,
   onRequesteClose,
 }: NewTransactionModalProps) {
+  const [type, setType] = useState("deposit");
+
   return (
     <Modal
       isOpen={isOpen}
@@ -32,15 +43,37 @@ export function NewTransactionModal({
 
         <input type="number" placeholder="Categoria" />
         <TransactionTypeContainer>
-          <button type="button">
-            <Image src={incomeImg} width={24} height={24} alt="entrada" />
+          <RadioBoxDeposit
+            type="button"
+            isActive={type === "deposit"}
+            onClick={() => {
+              setType("deposit");
+            }}
+          >
+            <Image
+              className="imgWithdraw"
+              src={type === "deposit" ? incomeImgActive : incomeImg}
+              width={24}
+              height={24}
+              alt="entrada"
+            />
             <span>Entrada</span>
-          </button>
-          <button type="button">
-            {" "}
-            <Image src={outcomeImg} width={24} height={24} alt="entrada" />
+          </RadioBoxDeposit>
+          <RadioBoxWithdraw
+            type="button"
+            isActive={type === "withdraw"}
+            onClick={() => {
+              setType("withdraw");
+            }}
+          >
+            <Image
+              src={type === "withdraw" ? outcomeImgActive : outcomeImg}
+              width={24}
+              height={24}
+              alt="saida"
+            />
             <span>Saida</span>
-          </button>
+          </RadioBoxWithdraw>
         </TransactionTypeContainer>
         <button type="submit">Cadastrar</button>
       </Container>

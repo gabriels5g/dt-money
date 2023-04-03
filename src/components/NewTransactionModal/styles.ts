@@ -10,20 +10,20 @@ export const Container = styled.form`
   input {
     font-size: 1rem;
     margin: 0.5rem 0;
-    color: #e1e1e6;
+    color: #7c7c8a;
     width: 100%;
-    padding: 0, 1.5rem;
-    height: 3.3rem;
+
+    height: 3.5rem;
     outline: none;
     padding: 1rem;
 
     border-radius: 0.375rem;
     border: 1px solid var(--black);
-    background: var(--black);
+    background: #121214;
   }
 
   button[type="submit"] {
-    margin-top: 8px;
+    margin-top: 1rem;
     color: white;
     width: 100%;
     height: 3.6rem;
@@ -32,7 +32,7 @@ export const Container = styled.form`
     border-radius: 0.375rem;
     border: 1px solid #00875f;
     transition: filter 0.2s;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: bold;
     line-height: 160%;
 
@@ -43,20 +43,48 @@ export const Container = styled.form`
 `;
 
 export const TransactionTypeContainer = styled.div`
-  margin: 1rem 0;
+  margin: 1.5rem 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.5rem;
+  gap: 1rem;
+`;
 
-  button {
-    color: #c4c4cc;
-    height: 4rem;
-    border: 1px solid #29292e;
-    border-radius: 0.375rem;
+interface RadioBoxProps {
+  isActive: boolean;
+}
 
-    background: #29292e;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+export const RadioBoxDeposit = styled.button<RadioBoxProps>`
+  color: ${(props) => (props.isActive ? "#FFFFFF" : "#C4C4CC")};
+  height: 4rem;
+  border: 1px solid #29292e;
+  border-radius: 0.375rem;
+
+  background: ${(props) => (props.isActive ? "#015F43" : "#29292E")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 1rem;
+  }
+`;
+
+export const RadioBoxWithdraw = styled.button<RadioBoxProps>`
+  color: ${(props) => (props.isActive ? "#FFFFFF" : "#C4C4CC")};
+  height: 4rem;
+  border: 1px solid #29292e;
+  border-radius: 0.375rem;
+
+  background: ${(props) => (props.isActive ? "#AA2834" : "#29292E")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    display: inline-block;
+    margin-left: 0.5rem;
+    font-size: 1rem;
   }
 `;

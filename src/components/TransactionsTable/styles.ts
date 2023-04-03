@@ -54,14 +54,12 @@ export const Contente = styled.div`
     color: #00b37e;
 
     padding: 14px 32px;
-    background: none;
+    background: transparent;
     border-radius: 6px;
     font-family: var(--roboto-font);
     display: flex;
+    align-items: center;
     gap: 12px;
     transition: filter 0.2s;
-    &:hover {
-      filter: brightness(1.2);
-    }
   }
 `;
