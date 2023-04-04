@@ -14,12 +14,15 @@ export const Container = styled.form`
     width: 100%;
 
     height: 3.5rem;
-    outline: none;
     padding: 1rem;
-
+    outline: none;
     border-radius: 0.375rem;
     border: 1px solid var(--black);
     background: #121214;
+
+    &:focus {
+      outline: solid 1px #00b37e;
+    }
   }
 
   button[type="submit"] {

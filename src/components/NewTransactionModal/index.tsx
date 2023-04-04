@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import Modal from "react-modal";
 import Close from "../../assets/close.svg";
 import incomeImg from "../../assets/entrada.svg";
@@ -24,7 +24,35 @@ export function NewTransactionModal({
   isOpen,
   onRequesteClose,
 }: NewTransactionModalProps) {
+  const [title, setTitle] = useState("");
+  const [value, setValue] = useState(0);
+  const [category, setCategory] = useState("");
   const [type, setType] = useState("deposit");
+
+  function handleCreateNewTransaction(event: FormEvent) {
+    const data = {
+      title,
+      value,
+      category,
+      type,
+    };
+    console.log(data);
+
+    fetch("http://localhost:3000/api/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Success:", data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 
   return (
     <Modal
@@ -36,12 +64,27 @@ export function NewTransactionModal({
       <button className="react-modal-close" onClick={onRequesteClose}>
         <Image src={Close} width={24} height={24} alt={""} />
       </button>
-      <Container>
+      <Container onSubmit={handleCreateNewTransaction}>
         <h2>Nova transação</h2>
-        <input type="text" placeholder="Descrição" />
-        <input type="number" placeholder="Preço" />
+        <input
+          type="text"
+          placeholder="Descrição"
+          value={title}
+          onChange={(event) => setTitle(event.target.value)}
+        />
+        <input
+          type="number"
+          placeholder="Preço"
+          value={value}
+          onChange={(event) => setValue(Number(event.target.value))}
+        />
 
-        <input type="number" placeholder="Categoria" />
+        <input
+          type="text"
+          placeholder="Categoria"
+          value={category}
+          onChange={(event) => setCategory(event.target.value)}
+        />
         <TransactionTypeContainer>
           <RadioBoxDeposit
             type="button"

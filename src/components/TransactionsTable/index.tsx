@@ -2,9 +2,28 @@
 
 import search from "@/assets/search.svg";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { Container, Contente } from "./styles";
 
+interface TransactionProps {
+  id: number;
+  title: string;
+  value: number;
+  type: string;
+  category: string;
+  createdAt: string;
+}
+
 export function TransactionsTable() {
+  const [transactions, setTransacion] = useState<TransactionProps[]>([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/transactions")
+      .then((response) => response.json())
+      .then((data) => setTransacion(data));
+  }, []);
+
+  console.log(transactions);
   return (
     <Container>
       <Contente>
@@ -16,18 +35,23 @@ export function TransactionsTable() {
       </Contente>
       <table>
         <tbody>
-          <tr>
-            <td>Desenvolvimento de website</td>
-            <td className="deposit">R$12.000</td>
-            <td>Desenvolvimento</td>
-            <td>28/03/2023</td>
-          </tr>
-          <tr>
-            <td>Aluguel</td>
-            <td className="withdraw">R$1.100</td>
-            <td>Casa</td>
-            <td>17/03/2023</td>
-          </tr>
+          {transactions.map((transactions) => (
+            <tr key={transactions.id}>
+              <td>{transactions.title}</td>
+              <td className={transactions.type}>
+                {new Intl.NumberFormat("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                }).format(transactions.value)}
+              </td>
+              <td>{transactions.category}</td>
+              <td>
+                {new Intl.DateTimeFormat("pt-BR", {}).format(
+                  new Date(transactions.createdAt)
+                )}
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </Container>
