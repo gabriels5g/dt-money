@@ -3,10 +3,10 @@ import { FormEvent, useState } from "react";
 import Modal from "react-modal";
 import Close from "../../assets/close.svg";
 import incomeImg from "../../assets/entrada.svg";
-import outcomeImg from "../../assets/saida.svg";
-
 import incomeImgActive from "../../assets/entradaAtiva.svg";
+import outcomeImg from "../../assets/saida.svg";
 import outcomeImgActive from "../../assets/saidaAtiva.svg";
+
 import {
   Container,
   RadioBoxDeposit,
@@ -44,14 +44,7 @@ export function NewTransactionModal({
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Success:", data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+    });
   }
 
   return (
