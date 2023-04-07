@@ -1,5 +1,6 @@
 "use client";
 
+import { TransactionContext } from "@/TransactionContext";
 import Dashboard from "@/components/Dashboard";
 import { Header } from "@/components/Header";
 import { NewTransactionModal } from "@/components/NewTransactionModal";
@@ -22,13 +23,15 @@ export default function Home() {
     setIsNewTransactionModalOpen(false);
   }
   return (
-    <>
+    <TransactionContext.Provider value={[]}>
       <Header onOpenNewTransactionModal={handleOpenNewTransactionModal} />
+
       <Dashboard />
+
       <NewTransactionModal
         isOpen={isNewTransactionModalOpen}
         onRequesteClose={handleCloseNewTransactionModal}
       />
-    </>
+    </TransactionContext.Provider>
   );
 }

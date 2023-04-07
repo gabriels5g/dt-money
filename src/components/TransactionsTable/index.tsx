@@ -23,7 +23,6 @@ export function TransactionsTable() {
       .then((data) => setTransacion(data));
   }, []);
 
-  console.log(transactions);
   return (
     <Container>
       <Contente>
