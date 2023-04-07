@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
 import Modal from "react-modal";
 import Close from "../../assets/close.svg";
 import incomeImg from "../../assets/entrada.svg";
@@ -7,6 +7,7 @@ import incomeImgActive from "../../assets/entradaAtiva.svg";
 import outcomeImg from "../../assets/saida.svg";
 import outcomeImgActive from "../../assets/saidaAtiva.svg";
 
+import { TransactionContext } from "@/TransactionContext";
 import {
   Container,
   RadioBoxDeposit,
@@ -29,21 +30,15 @@ export function NewTransactionModal({
   const [category, setCategory] = useState("");
   const [type, setType] = useState("deposit");
 
+  const { createTransaction } = useContext(TransactionContext);
+
   function handleCreateNewTransaction(event: FormEvent) {
-    const data = {
+    event.preventDefault();
+    createTransaction({
       title,
       value,
       category,
       type,
-    };
-    console.log(data);
-
-    fetch("http://localhost:3000/api/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
     });
   }
 

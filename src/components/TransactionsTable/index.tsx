@@ -1,27 +1,11 @@
-"use client";
-
+import { TransactionContext } from "@/TransactionContext";
 import search from "@/assets/search.svg";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Container, Contente } from "./styles";
 
-interface TransactionProps {
-  id: number;
-  title: string;
-  value: number;
-  type: string;
-  category: string;
-  createdAt: string;
-}
-
 export function TransactionsTable() {
-  const [transactions, setTransacion] = useState<TransactionProps[]>([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/api/transactions")
-      .then((response) => response.json())
-      .then((data) => setTransacion(data));
-  }, []);
+  const { transactions } = useContext(TransactionContext);
 
   return (
     <Container>

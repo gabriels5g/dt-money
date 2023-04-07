@@ -6,6 +6,7 @@ export const Container = styled.div`
   margin-top: 4rem;
 
   table {
+    margin-top: 1.5rem;
     width: 1120px;
     border-spacing: 0 0.5rem;
 
