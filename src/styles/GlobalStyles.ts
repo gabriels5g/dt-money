@@ -65,6 +65,7 @@ export default createGlobalStyle`
   }
 
   .react-modal-content {
+    transition:  20ms ease-in-out;
 		width: 100%;
 		max-width: 535px;
 		background: var(--background);
@@ -95,5 +96,20 @@ input[type=number]::-webkit-inner-spin-button {
 
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 200ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+    opacity: 1;
+    transition: opacity 200ms ease-in-out;
+}
+
+.ReactModal__Overlay--before-close{
+    opacity: 0;
+    
 }
 `;

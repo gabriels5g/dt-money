@@ -14,7 +14,7 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   if (req.method === "POST") {
-    const { title, value, category, type, createdAt } = req.body;
+    const { title, value, category, type } = req.body;
 
     await prisma.transaction.create({
       data: {
@@ -28,10 +28,5 @@ export default async function handler(
 
     console.log(req.body);
     res.status(201).json(req.body);
-  }
-  if (req.method === "GET") {
-    const transaction = await prisma.transaction.findMany();
-
-    return transaction;
   }
 }
