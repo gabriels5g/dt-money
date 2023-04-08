@@ -1,11 +1,10 @@
-import { TransactionContext } from "@/TransactionContext";
 import search from "@/assets/search.svg";
+import { useTransactions } from "@/hooks/useTransactions";
 import Image from "next/image";
-import { useContext } from "react";
 import { Container, Contente } from "./styles";
 
 export function TransactionsTable() {
-  const { transactions } = useContext(TransactionContext);
+  const { transactions } = useTransactions();
 
   return (
     <Container>
@@ -25,7 +24,7 @@ export function TransactionsTable() {
                 {new Intl.NumberFormat("pt-BR", {
                   style: "currency",
                   currency: "BRL",
-                }).format(transactions.value)}
+                }).format(transactions.amount)}
               </td>
               <td>{transactions.category}</td>
               <td>

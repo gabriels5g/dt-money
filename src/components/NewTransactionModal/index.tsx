@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useState } from "react";
 import Modal from "react-modal";
 import Close from "../../assets/close.svg";
 import incomeImg from "../../assets/entrada.svg";
@@ -7,7 +7,7 @@ import incomeImgActive from "../../assets/entradaAtiva.svg";
 import outcomeImg from "../../assets/saida.svg";
 import outcomeImgActive from "../../assets/saidaAtiva.svg";
 
-import { TransactionContext } from "@/TransactionContext";
+import { useTransactions } from "@/hooks/useTransactions";
 import {
   Container,
   RadioBoxDeposit,
@@ -26,20 +26,21 @@ export function NewTransactionModal({
   onRequesteClose,
 }: NewTransactionModalProps) {
   const [title, setTitle] = useState("");
-  const [value, setValue] = useState(0);
+  const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
   const [type, setType] = useState("deposit");
 
-  const { createTransaction } = useContext(TransactionContext);
+  const { createTransaction } = useTransactions();
 
-  function handleCreateNewTransaction(event: FormEvent) {
+  async function handleCreateNewTransaction(event: FormEvent) {
     event.preventDefault();
-    createTransaction({
-      title,
-      value,
-      category,
-      type,
-    });
+
+    await createTransaction({ type, title, amount, category });
+    setTitle("");
+    setAmount(0);
+    setCategory("");
+    setType("deposit");
+    onRequesteClose();
   }
 
   return (
@@ -63,8 +64,8 @@ export function NewTransactionModal({
         <input
           type="number"
           placeholder="Preço"
-          value={value}
-          onChange={(event) => setValue(Number(event.target.value))}
+          value={amount}
+          onChange={(event) => setAmount(Number(event.target.value))}
         />
 
         <input

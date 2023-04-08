@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 type Transaction = {
   title: string;
-  value: number;
+  amount: number;
   category: string;
   type: string;
 };
@@ -17,7 +17,7 @@ export default async function handler(
     const formattedTransaction = transaction.map((t) => {
       return {
         ...t,
-        value: Number(t.value),
+        value: Number(t.amount),
       };
     });
 

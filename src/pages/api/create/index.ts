@@ -3,7 +3,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
   title: string;
-  value: number;
+  amount: number;
   category: string;
   type: string;
   createdAt: Data;
@@ -11,15 +11,15 @@ type Data = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) {
   if (req.method === "POST") {
-    const { title, value, category, type } = req.body;
+    const { title, amount, category, type, createdAt }: Data = req.body;
 
     await prisma.transaction.create({
       data: {
         title,
-        value,
+        amount,
         category,
         type,
         createdAt: new Date(),

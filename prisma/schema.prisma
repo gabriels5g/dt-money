@@ -13,7 +13,7 @@ datasource db {
 model Transaction {
   id String @id @default(uuid())
   title String
-  value Float
+  amount Float
   category String
   type String
   createdAt DateTime

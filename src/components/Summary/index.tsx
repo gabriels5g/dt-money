@@ -1,13 +1,12 @@
-import { TransactionContext } from "@/TransactionContext";
 import incomeImg from "@/assets/entrada.svg";
 import outcomeImg from "@/assets/saida.svg";
 import balance from "@/assets/total.svg";
+import { useTransactions } from "@/hooks/useTransactions";
 import Image from "next/image";
-import { useContext } from "react";
 import { Container } from "./styles";
 
 export default function Summary() {
-  const { transactions } = useContext(TransactionContext);
+  const { transactions } = useTransactions();
 
   // const totalDeposit = transactions.reduce((acc, transaction) => {
   //   if (transaction.type === "deposit") {
@@ -25,23 +24,26 @@ export default function Summary() {
   //   return acc;
   // }, 0);
 
-  const summary = transactions.reduce(
-    (acc, transaction) => {
-      if (transaction.type === "deposit") {
-        acc.deposits += transaction.value;
-        acc.total += transaction.value;
-      } else {
-        acc.withdraws += transaction.value;
-        acc.total -= transaction.value;
-      }
-      return acc;
-    },
-    {
-      deposits: 0,
-      withdraws: 0,
-      total: 0,
+
+
+  const summary = transactions.reduce((acc, transaction) => {
+    if (transaction.type === 'deposit') {
+      acc.deposits += transaction.amount;
+      acc.total += transaction.amount;
+    } else {
+      acc.withdraws += transaction.amount;
+      acc.total -= transaction.amount;
     }
-  );
+    return acc;
+  }, {
+    deposits: 0,
+    withdraws: 0,
+    total: 0,
+  });
+
+
+  console.log(transactions);
+
   return (
     <Container>
       <div>

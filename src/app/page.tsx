@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import { TransactionsProvider } from "@/TransactionContext";
 import Dashboard from "@/components/Dashboard";
 import { Header } from "@/components/Header";
 import { NewTransactionModal } from "@/components/NewTransactionModal";
+import { TransactionsProvider } from "@/hooks/useTransactions";
 import { useState } from "react";
 import { default as ReactModal } from "react-modal";
 
